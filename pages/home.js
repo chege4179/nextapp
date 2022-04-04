@@ -36,9 +36,9 @@ const RegisterPage = () => {
 	});
 	const user = useSelector(SelectUser)
 	useEffect(() => {
-		// if (user === null){
-		// 	router.push("/login")
-		// }
+		if (user === null){
+			router.push("/login")
+		}
 	},[user])
 	const RegisterUser = async (e) => {
 		e.preventDefault()
