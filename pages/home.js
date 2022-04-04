@@ -7,9 +7,11 @@ import "react-toastify/dist/ReactToastify.css"
 import { ToastContainer,toast } from "react-toastify"
 import {useSelector} from "react-redux";
 import {SelectUser} from "../ReduxStore/UserReducer";
-import {router} from "next/client";
+import {useRouter} from "next/router";
+
 
 const RegisterPage = () => {
+	const router = useRouter()
 	const [isLoading,setIsLoading] = useState(false)
 	const form = useForm({
 		initialValues: {
@@ -34,9 +36,9 @@ const RegisterPage = () => {
 	});
 	const user = useSelector(SelectUser)
 	useEffect(() => {
-		if (user === null){
-			router.push("/login")
-		}
+		// if (user === null){
+		// 	router.push("/login")
+		// }
 	},[user])
 	const RegisterUser = async (e) => {
 		e.preventDefault()
@@ -64,192 +66,285 @@ const RegisterPage = () => {
 	return (
 		<Layout>
 			<ToastContainer/>
-			<div className="w-full h-full flex justify-center pt-8 ">
-				<form className="w-full max-w-lg mb-8" onSubmit={RegisterUser}>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-first-name">
-								First Name
-							</label>
-							<input
-								{ ...form.getInputProps("firstName")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-								id="grid-first-name" type="text" placeholder="Jane"/>
+			<div className="flex justify-center ">
+				<div className="border-2 border-orange-500 p-4 rounded-3xl">
+					<form className="w-full h-full max-w-2xl flex flex-col items-center justify-center" onSubmit={RegisterUser}>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full h-32 items-center justify-center border-b-orange-500 border-b-4">
+							<h1 className="text-3xl font-bold">Webinar Registration Form</h1>
+						</div>
+
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className="block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  >
+									Name
+								</label>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+
+								<input
+									{ ...form.getInputProps("firstName")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white border-orange-500"
+									id="grid-first-name" type="text" placeholder="Jane"/>
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-first-name">
+									First Name
+								</label>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3">
+
+								<input
+									{ ...form.getInputProps("lastName")}
+									required={true}
+									className=" border-orange-500 appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									id="grid-last-name" type="text" placeholder="Doe"/>
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-last-name">
+									Last Name
+								</label>
+							</div>
+						</div>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className="block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Email
+								</label>
+
+							</div>
+							<div className="w-full px-3 md:w-3/4">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-password">
+									Email
+								</label>
+								<input
+									{ ...form.getInputProps("email")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									id="grid-password" type="email" placeholder="myname@gmail.com"/>
+
+							</div>
+						</div>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className=" whitespace-nowrap block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Work Phone
+								</label>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+
+								<input
+									{ ...form.getInputProps("area_code")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+									id="grid-first-name" type="text" />
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-first-name">
+									Area Code
+								</label>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3">
+
+								<input
+									{ ...form.getInputProps("phoneNumber")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									id="grid-last-name" type="text" />
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-last-name">
+									Phone Number
+								</label>
+							</div>
+						</div>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<h2
+									className="block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2 pb-4"
+								>
+									Company
+								</h2>
+
+							</div>
+							<div className="w-full px-3 md:w-3/4">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-password">
+									Company
+								</label>
+								<input
+									{ ...form.getInputProps("company")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									type="text" />
+
+							</div>
+
 
 						</div>
-						<div className="w-full md:w-1/2 px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-last-name">
-								Last Name
-							</label>
-							<input
-								{ ...form.getInputProps("lastName")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								id="grid-last-name" type="text" placeholder="Doe"/>
-						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-password">
-								Email
-							</label>
-							<input
-								{ ...form.getInputProps("email")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								id="grid-password" type="email" placeholder="myname@gmail.com"/>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<h2
+									className="block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2 pb-4"
+								>
+									Company Address
+								</h2>
+
+							</div>
+							<div className="w-full px-3 md:w-3/4">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-password">
+									Street Address 1
+								</label>
+								<input
+									{ ...form.getInputProps("streetAddress1")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									type="text" />
+
+							</div>
+
 
 						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-first-name">
-								Area Code
-							</label>
-							<input
-								{ ...form.getInputProps("area_code")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border  rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-								id="grid-first-name" type="text" />
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<h2
+									className="block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2 pb-4"
+								>
+
+								</h2>
+
+							</div>
+							<div className="w-full px-3 md:w-3/4">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-password">
+									Street Address 2
+								</label>
+								<input
+									{ ...form.getInputProps("streetAddress2")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									type="text" />
+
+							</div>
+
 
 						</div>
-						<div className="w-full md:w-1/2 px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-last-name">
-								Phone Number
-							</label>
-							<input
-								{ ...form.getInputProps("phoneNumber")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								id="grid-last-name" type="text" />
-						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-password">
-								Company
-							</label>
-							<input
-								{ ...form.getInputProps("company")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								type="text" />
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className=" whitespace-nowrap block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
 
-						</div>
-						<div className="w-full px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-password">
-								Street Address 1
-							</label>
-							<input
-								{ ...form.getInputProps("streetAddress1")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								type="text" />
+								</label>
 
-						</div>
-						<div className="w-full px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-password">
-								Street Address 2
-							</label>
-							<input
-								{ ...form.getInputProps("streetAddress2")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								type="text" />
+							</div>
+							<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+									  htmlFor="grid-first-name">
+									City
+								</label>
+								<input
+									{ ...form.getInputProps("city")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+									id="grid-first-name" type="text" placeholder="Jane"/>
 
+							</div>
+							<div className="w-full md:w-1/3 px-3">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									State/Province
+								</label>
+								<input
+									{ ...form.getInputProps("state")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									id="grid-last-name" type="text" placeholder="Doe"/>
+							</div>
 						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  htmlFor="grid-first-name">
-								City
-							</label>
-							<input
-								{ ...form.getInputProps("city")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-								id="grid-first-name" type="text" placeholder="Jane"/>
-							<p className="text-red-500 text-xs italic">Please fill out this field.</p>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className=" whitespace-nowrap block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+
+								</label>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Zip Code
+								</label>
+								<input
+									{ ...form.getInputProps("zipCode")}
+									required={true}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
+									id="grid-first-name" type="text" placeholder="Jane"/>
+
+							</div>
+							<div className="w-full md:w-1/3 px-3">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Country
+								</label>
+								<select
+									required={true}
+									{ ...form.getInputProps("country")}
+									className="block appearance-none w-full bg-gray-200 border border-orange-500 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+								>
+									<option value=''>Select a Country</option>
+									{
+										countries.map((country,index) => {
+											return(<option key={index} value={country.name}>{country.name}</option>)
+
+										})
+									}
+								</select>
+							</div>
 						</div>
-						<div className="w-full md:w-1/2 px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  >
-								State/Province
-							</label>
-							<input
-								{ ...form.getInputProps("state")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								id="grid-last-name" type="text" placeholder="Doe"/>
+						<div className="flex flex-wrap -mx-3 mb-6 w-full">
+							<div className="w-full md:w-1/4 px-3 mb-6 md:mb-0 flex items-center justify-center">
+								<label
+									className=" whitespace-nowrap block text-xl pb-4 tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Company Website
+								</label>
+
+							</div>
+							<div className="w-full px-3 md:w-3/4">
+								<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+								>
+									Company Website
+								</label>
+								<input
+									required={true}
+									{ ...form.getInputProps("website")}
+									className="appearance-none block w-full bg-gray-200 text-gray-700 border border-orange-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+									type="text" placeholder="myname@gmail.com"/>
+
+							</div>
 						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  >
-								Zip Code
-							</label>
-							<input
-								{ ...form.getInputProps("zipCode")}
-								required={true}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white"
-								id="grid-first-name" type="text" placeholder="Jane"/>
-							<p className="text-red-500 text-xs italic">Please fill out this field.</p>
-						</div>
-						<div className="w-full md:w-1/2 px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  >
-								Country
-							</label>
-							<select
-								required={true}
-								{ ...form.getInputProps("country")}
-								className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+						<div className="w-full flex items-center justify-center">
+							<button
+								disabled={isLoading}
+								type="submit"
+								className=" mt-6 block appearance-none w-1/2 bg-orange-500 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-indigo-500 focus:border-gray-500"
 							>
-								<option value=''>Select a Country</option>
-								{
-									countries.map((country,index) => {
-										return(<option key={index} value={country.name}>{country.name}</option>)
-
-									})
-								}
-							</select>
+								Submit
+							</button>
 						</div>
-					</div>
-					<div className="flex flex-wrap -mx-3 mb-6">
-						<div className="w-full px-3">
-							<label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-								  >
-								Company Website
-							</label>
-							<input
-								required={true}
-								{ ...form.getInputProps("website")}
-								className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-								type="text" placeholder="myname@gmail.com"/>
+					</form>
+				</div>
 
-						</div>
-					</div>
-					<div className="w-full ">
-						<button
-							disabled={isLoading}
-							type="submit"
-							className=" mt-6 block appearance-none w-full bg-indigo-600 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-indigo-500 focus:border-gray-500"
-						>
-							Submit
-						</button>
-					</div>
-				</form>
 
 			</div>
 

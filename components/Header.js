@@ -14,7 +14,7 @@ const Header = () => {
 		})
 	}
 	return (
-		<div className="w-full h-16 bg-indigo-500 flex items-center justify-end px-4 ">
+		<div className="w-full h-16 bg-orange-500 flex items-center justify-end px-4 ">
 			<Link href="/home">
 				<button
 					className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 border border-blue-700 rounded mr-4">
